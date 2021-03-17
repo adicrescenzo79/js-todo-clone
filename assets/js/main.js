@@ -4,8 +4,10 @@ $(document).ready(function(){
     $('ul.todos').hide();
   }
 
+  // FACCIO APPARIRE LA FORM  DI INSERIMENTO
   $('i.add').click(function(){
     $('.aggiunta').removeClass('inactive');
+    $('input#nuovo').focus();
   })
 
   $('input#nuovo').keyup(function(e){
@@ -22,22 +24,25 @@ $(document).ready(function(){
       }
 
       // CANCELLAZIONE RIGA
-      var fatto = template.children('i.done');
+      var fatto = template.children('.icons').children('i.done');
       fatto.click(function(){
-        $(this).parent('li').remove();
+        $(this).parents('li').remove();
         if ($('ul.todos li').length == 0) {
           $('ul.todos').hide();
         }
       })
 
       // MODIFICA RIGA
-      var modifica = template.children('i.edit');
+      var modifica = template.children('.icons').children('i.edit');
 
       modifica.click(function(){
-        var title = $(this).siblings('span.title');
+        var title = $(this).parent('.icons').siblings('span.title');
         var valore = title.text();
         title.hide();
-        $(this).siblings('input#mod').val(valore).show();
+        $(this).parent('.icons').siblings('input#mod').val(valore).show();
+        $('input#mod').focus();
+        $(this).hide();
+
       })
 
       var modificato = template.children('input#mod');
@@ -48,6 +53,7 @@ $(document).ready(function(){
           var title = $(this).siblings('span.title');
           title.text(valoreNew).show();
           $(this).hide();
+          $(this).siblings('.icons').children('i.edit').show();
         }
       })
 
