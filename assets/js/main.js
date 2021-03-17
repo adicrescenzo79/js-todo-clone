@@ -1,14 +1,8 @@
 $(document).ready(function(){
 
-  var lista = $('ul.todos');
-  console.log(lista);
-  console.log(lista.text());
-  if (lista.text() == '') {
+  if ($('ul.todos li').length == 0) {
     $('ul.todos').hide();
-    console.log(lista.text());
   }
-
-
 
   $('i.add').click(function(){
     $('.aggiunta').removeClass('inactive');
@@ -31,6 +25,9 @@ $(document).ready(function(){
       var fatto = template.children('i.done');
       fatto.click(function(){
         $(this).parent('li').remove();
+        if ($('ul.todos li').length == 0) {
+          $('ul.todos').hide();
+        }
       })
 
       // MODIFICA RIGA
@@ -56,6 +53,8 @@ $(document).ready(function(){
 
       var todos = $('ul.todos');
       todos.append(template);
+
+      $('ul.todos').show();
 
       $('.aggiunta').addClass('inactive');
 
