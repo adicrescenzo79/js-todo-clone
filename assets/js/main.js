@@ -7,12 +7,15 @@ $(document).ready(function(){
   // FACCIO APPARIRE LA FORM  DI INSERIMENTO
   $('i.add').click(function(){
     $('.aggiunta').removeClass('inactive');
+    $('input#nuovo').val('');
     $('input#nuovo').focus();
   })
 
   $('input#nuovo').keyup(function(e){
 
-    if (e.which == 13) {
+    if(e.which == 27) {
+      $('input#nuovo').parents('.aggiunta').addClass('inactive');
+    } else if (e.which == 13) {
       var template = $('.todo li').clone();
       var nuovo = $(this).val();
 
